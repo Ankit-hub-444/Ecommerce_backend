@@ -5,40 +5,38 @@ class ProductdetailsController <ActionController::Base
         data = ["abc", "def", "efg","dwd","sws","dwdw"]
         render :json => data
     end
-    def getTitle
-        detailsList = DetailsList.all
-        render :json=> detailsList
-    end
-    # def getAll
-    #     todoList = Todolist.all
-    #     render :json=>todoList
-    # end
-    # def createTodo
-    #     todoItem={
-    #         "title"=>params[:title]
-    #     }
-    #     todo = Todolist.new(todoItem)
-    #     todo.save
-    #     render :json=>todo
-    # end
-    # def updateTodo
-    #     todoid = Todolist.find(params[:id])
-    #     puts "params value"
-    #     puts params[:id]
-    #     puts params[:title]
-    #     todoItem={
-    #         "title"=>params[:title]
-    #         # title.sub! /(.*)/, "my value changed"
-    #     }
-    #     todo = todoid.update(todoItem)
-    #     # todo.save
-    #     render :json=>todo
-    # end
 
-    # def deleteTodo
-        
-    #     todo = Todolist.find(params[:id])
-    #     todo.destroy
-    #     render :json=>todo
-    # end
+    def getTable
+        # DetailsList=[]
+        detailsList = Productdetail.all
+        render :json=> detailsList
+    end 
+    def createTable
+        productItem={
+            "title"=>params[:title],
+            "year"=>params[:year],
+            "price"=>params[:price],
+            "category"=>params[:category],
+            "quantity"=>params[:quantity],
+            "imageurl"=>params[:imageurl],
+            "description"=>params[:description]
+        }
+        product = Productdetail.new(productItem)
+        product.save
+        render :json=>product
+
+    end
+    def deleteTable
+        product = Productdetail.find(params[:id])
+        product.destroy
+        render :json=>product
+    end
+    def updateTable
+        todoid = Productdetail.find(params[:id])
+        todoItem={
+            "title"=>params[:title]
+        }
+        todo = todoid.update(todoItem)
+        render :json=>todo
+    end
 end
